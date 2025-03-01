@@ -1,0 +1,716 @@
+/* تنسيقات وحدة البحث - search.css */
+/* رابط النشر: https://hajj-healthcare-app.netlify.app/ */
+/* الإصدار: 1.2.0 */
+
+/* متغيرات الألوان */
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #dbeafe;
+  --secondary-color: #6b7280;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  --background-color: #f8fafc;
+  --card-color: #ffffff;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition: all 0.3s ease-in-out;
+}
+
+/* تنسيقات عامة */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.6;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+}
+
+.bg-gradient-light {
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6) !important;
+}
+
+/* تنسيقات عنوان البحث */
+.search-header {
+  padding: 1.5rem 0;
+}
+
+.search-header h2 {
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.search-header p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.search-header .badge {
+  cursor: help;
+  transition: var(--transition);
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 50px;
+}
+
+.search-header .badge:hover {
+  background-color: #374151;
+  transform: translateY(-2px);
+}
+
+/* حاوية البحث */
+.search-container {
+  max-width: 650px;
+  width: 100%;
+  margin: 20px auto 30px;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  padding: 1rem 1.5rem;
+}
+
+/* حقول البحث */
+.search-field {
+  margin-bottom: 1.5rem;
+}
+
+.search-field label {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  box-shadow: none;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.input-group-lg > .form-control {
+  height: 55px;
+  font-size: 1.1rem;
+}
+
+.input-group .clear-button {
+  z-index: 5;
+  border-right: none;
+}
+
+.form-text {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* وضع التحميل في حقل البحث */
+.is-searching {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath opacity='.2' fill='%23000' d='M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zm0 26.58c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z'/%3E%3Cpath fill='%2300c6ff' d='M26.013 10.047l1.654-2.866a14.855 14.855 0 00-7.466-2.012v3.312c2.119 0 4.1.576 5.812 1.566z'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 20 20' to='360 20 20' dur='1s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  background-position: left 15px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+/* فاصل (أو) */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.divider::before, 
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.divider span {
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  color: var(--secondary-color);
+  position: relative;
+  top: 0.1rem;
+}
+
+/* أزرار البحث */
+.search-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.search-buttons .btn {
+  min-width: 150px;
+}
+
+.btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover, 
+.btn-primary:focus {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.btn-outline-secondary {
+  color: var(--secondary-color);
+  border-color: #d1d5db;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+  transform: translateY(-3px);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.btn-danger:hover, 
+.btn-danger:focus {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* مؤشر التحميل */
+#loadingSpinner {
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.loading-text {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* نتائج البحث */
+#searchResults {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.search-results-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.search-results-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.search-results-count {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* فلترة النتائج */
+.filter-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.filter-container .form-control {
+  padding-right: 3rem;
+  background-color: #f9fafb;
+}
+
+.filter-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* جدول نتائج البحث */
+.table-container {
+  background-color: var(--card-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background-color: #f8fafc;
+  font-weight: 700;
+  color: var(--text-color);
+  padding: 1rem;
+  border-top: none;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background-color: #eef2ff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.table th i,
+.table td i {
+  opacity: 0.7;
+  margin-left: 0.5rem;
+}
+
+.table tbody td {
+  vertical-align: middle;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-footer {
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* تمييز النص في نتائج البحث */
+.highlight {
+  background-color: var(--primary-light);
+  border-radius: 3px;
+  padding: 0 3px;
+  font-weight: 600;
+}
+
+/* بطاقة بيانات الحاج */
+#pilgrimCard {
+  max-width: 750px;
+  margin: 2rem auto;
+}
+
+.pilgrim-id {
+  font-size: 1rem;
+}
+
+/* جسم بطاقة الحاج */
+.pilgrim-body {
+  padding: 1.5rem;
+}
+
+/* أقسام بيانات الحاج */
+.pilgrim-section {
+  margin-bottom: 2rem;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.pilgrim-section:last-child {
+  margin-bottom: 0;
+}
+
+.pilgrim-section h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+.pilgrim-section h4 i {
+  margin-left: 0.75rem;
+  opacity: 0.8;
+}
+
+/* جدول بيانات الحاج */
+.pilgrim-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pilgrim-data-table tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pilgrim-data-table tr:last-child {
+  border-bottom: none;
+}
+
+.pilgrim-data-table th, 
+.pilgrim-data-table td {
+  padding: 0.75rem 0.5rem;
+  text-align: right;
+}
+
+.pilgrim-data-table th {
+  font-weight: 600;
+  width: 40%;
+  color: var(--text-muted);
+}
+
+.pilgrim-data-table td {
+  font-weight: 500;
+}
+
+/* فوتر بطاقة الحاج */
+.card-footer {
+  padding: 1.25rem;
+  background-color: #f8fafc;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.card-footer .btn {
+  flex: 1 1 auto;
+  white-space: nowrap;
+}
+
+/* ترتيب خاص للأزرار على الشاشات الكبيرة */
+.card-footer .btn:nth-child(1) { order: 1; } /* إضافة بيانات علاجية */
+.card-footer .btn:nth-child(2) { order: 2; } /* إضافة بيانات الوفاة */
+.card-footer .btn:nth-child(3) { order: 3; } /* طباعة البيانات */
+
+/* تنبيهات */
+.alert {
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.alert-icon {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-warning {
+  background-color: #fffbeb;
+  color: #92400e;
+}
+
+.alert-info {
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.alert-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+
+/* تأثيرات الحيوية والحركة */
+.animate__animated {
+  --animate-duration: 0.5s;
+}
+
+/* شارات وعلامات */
+.badge {
+  padding: 0.35em 0.65em;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.badge-pill {
+  border-radius: 50px;
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+}
+
+/* فوتر التطبيق */
+.app-footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.app-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+/* عناصر مرئية فقط عند الطباعة */
+.print-only {
+  display: none;
+}
+
+/* شعار بطاقة الطباعة */
+.print-logo {
+  margin-bottom: 20px;
+}
+
+.print-passport-badge {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.print-footer {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  color: #666;
+}
+
+/* تنسيقات إضافية للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .search-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .search-container {
+    margin: 1rem 0;
+  }
+  
+  .card-header, 
+  .card-body, 
+  .card-footer {
+    padding: 1rem;
+  }
+  
+  .btn-lg {
+    font-size: 1rem;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .search-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .pilgrim-section {
+    padding: 1rem;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+  }
+  
+  .card-footer .btn {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  /* ترتيب عرض الأزرار على الموبايل */
+  .card-footer .btn:nth-child(1) { order: 1; } /* إضافة بيانات علاجية */
+  .card-footer .btn:nth-child(2) { order: 2; } /* إضافة بيانات الوفاة */
+  .card-footer .btn:nth-child(3) { order: 3; } /* طباعة البيانات */
+  
+  .table thead th:nth-child(4),
+  .table tbody td:nth-child(4),
+  .table thead th:nth-child(5),
+  .table tbody td:nth-child(5) {
+    display: none;
+  }
+}
+
+/* تنسيقات الطباعة */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #printFrame, #printFrame * {
+    visibility: visible;
+  }
+  
+  #printFrame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  .print-header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .print-header h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .print-header h3 {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .passport-badge {
+    text-align: center;
+    margin: 15px 0;
+    padding: 8px 15px;
+    background-color: #f8f9fa !important;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #000 !important;
+    display: inline-block;
+  }
+  
+  .pilgrim-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 15px;
+    border: 1px solid #ddd !important;
+    border-radius: 8px;
+    background-color: #fff !important;
+  }
+  
+  .pilgrim-section h4 {
+    color: #000 !important;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .pilgrim-data-table {
+    width: 100%;
+  }
+  
+  .pilgrim-data-table th,
+  .pilgrim-data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .pilgrim-data-table tr:last-child th,
+  .pilgrim-data-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .print-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+  }
+  
+  /* تنسيق الصفحة */
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}

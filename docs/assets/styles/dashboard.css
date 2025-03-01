@@ -1,0 +1,344 @@
+/* تنسيقات خاصة بلوحة المتابعة لحجاج اليمن */
+
+/* تنسيق الشريط الجانبي */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0; /* RTL تعديل للغة العربية */
+  height: 100vh;
+  width: 280px;
+  background-color: #f8f9fa;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.97));
+  border-left: 1px solid #e5e5e5; /* RTL تعديل للغة العربية */
+  padding: 20px 0;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar .sidebar-header {
+  margin-bottom: 25px;
+  padding: 0 20px;
+}
+
+.sidebar .slogan {
+  color: var(--gold-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 10px 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* شريط ألوان علم اليمن */
+.yemen-flag-strip {
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    #CE1126 33.33%, /* أحمر */
+    white 33.33%, 66.66%,
+    black 66.66% /* أسود */
+  );
+  border-radius: 4px;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.yemen-badge {
+  background-color: var(--gold-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-footer {
+  margin-top: 30px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar .components {
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar .components li {
+  margin-bottom: 5px;
+}
+
+.sidebar .components li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 0 30px 30px 0;
+  border-right: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.sidebar .components li a:hover,
+.sidebar .components li a:focus {
+  background-color: rgba(200, 162, 29, 0.15);
+  color: var(--gold-color);
+  border-right-color: var(--gold-color);
+}
+
+.sidebar .components li a i {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(200, 162, 29, 0.15);
+  border-radius: 50%;
+  color: var(--gold-color);
+}
+
+.help-link {
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  padding-top: 15px !important;
+}
+
+/* تنسيق المحتوى الرئيسي */
+.content {
+  margin-right: 280px; /* RTL تعديل للغة العربية */
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.section-title {
+  color: var(--title-color);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--light-gray);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold-color);
+}
+
+/* تحسين البطاقات الإحصائية */
+.stat-card {
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fff;
+  position: relative;
+}
+
+.stat-card .stat-icon {
+  font-size: 2.2rem;
+  color: var(--gold-color);
+  opacity: 0.9;
+}
+
+.stat-card .stat-icon.text-danger {
+  color: var(--yemen-red);
+}
+
+.stat-card:hover, 
+.stat-card:focus {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.8rem 1.5rem;
+  z-index: 2;
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(200, 162, 29, 0.15), transparent 70%);
+  z-index: 1;
+}
+
+.stat-card .card-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--title-color);
+  font-size: 1.1rem;
+}
+
+.stat-card .display-6 {
+  font-weight: bold;
+  margin: 0;
+  color: var(--text-color);
+  font-size: 2.4rem;
+}
+
+.season-badge {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.65rem;
+  margin-top: 2px;
+}
+
+/* تنسيق الرسم البياني */
+.chart-container {
+  position: relative;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.chart-controls {
+  display: flex;
+  align-items: center;
+}
+
+.chart-controls .form-select {
+  width: auto;
+  padding: 0.3rem 2rem 0.3rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* تحسين قسم الحالات العاجلة */
+.urgent-case {
+  border-left: 3px solid var(--yemen-red);
+  transition: background-color 0.2s;
+}
+
+.urgent-case:hover {
+  background-color: rgba(217, 83, 79, 0.05);
+}
+
+/* تأثير التركيز للبطاقات */
+.card-focus {
+  box-shadow: 0 0 0 3px var(--gold-color) !important;
+}
+
+/* زر القائمة الجانبية للأجهزة المحمولة */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1100;
+  padding: 0.6rem 0.8rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* توافق الأجهزة المحمولة */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 250px;
+  }
+  
+  .content {
+    margin-right: 250px;
+  }
+  
+  .sidebar .components li a {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+  
+  .stat-card .card-title {
+    font-size: 1rem;
+  }
+  
+  .stat-card .display-6 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+  
+  .sidebar.show {
+    width: 280px;
+    padding: 20px 0;
+    opacity: 1;
+  }
+  
+  .content {
+    margin-right: 0;
+  }
+  
+  /* إظهار زر القائمة على الأجهزة المحمولة */
+  .sidebar-toggle {
+    display: block;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* تحسين الطباعة */
+@media print {
+  .sidebar, 
+  header, 
+  #notificationBtn, 
+  #refreshBtn,
+  .toast-container, 
+  .sidebar-toggle,
+  .card-footer,
+  #helpModal {
+    display: none !important;
+  }
+  
+  .content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .dashboard-stats .card,
+  .dashboard-charts .card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+  }
+  
+  .stat-card::before {
+    display: none;
+  }
+  
+  .stat-card, 
+  .custom-card {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  
+  /* إضافة شعار البعثة في المطبوعة */
+  body::before {
+    content: "البعثة الطبية اليمنية - موسم حج 1446هـ";
+    font-size: 18pt;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    color: #000;
+  }
+}

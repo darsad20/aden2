@@ -1,0 +1,184 @@
+/* 
+ * تنسيقات وحدة الوفاة
+ * نظام إدارة الحجاج
+ */
+
+/* تنسيقات عامة */
+body {
+  font-family: 'Tajawal', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.custom-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.custom-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  border-radius: 8px 8px 0 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* العنوان والترويسة */
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-header h2 {
+  color: #3c4b64;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* بطاقة بيانات الحاج */
+#pilgrimDetails {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+#pilgrimDetails p {
+  margin-bottom: 8px;
+}
+
+#pilgrimDetails strong {
+  color: #495057;
+}
+
+/* تنسيقات النموذج */
+label {
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 6px;
+}
+
+.form-control,
+.form-select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #3c4b64;
+  box-shadow: 0 0 0 0.2rem rgba(60, 75, 100, 0.15);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+}
+
+/* التاريخ الهجري */
+.hijri-date {
+  display: block;
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 4px;
+}
+
+/* أزرار */
+.btn-primary {
+  background-color: #3c4b64;
+  border-color: #3c4b64;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2d3a4f;
+  border-color: #2d3a4f;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* تنبيهات */
+.alert {
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+#searchPrompt {
+  background-color: #e3f2fd;
+  border-color: #b3d7ff;
+  color: #004085;
+}
+
+/* تحميل الملفات */
+#reportUpload {
+  padding: 8px;
+}
+
+/* Modal تأكيد */
+.modal-content {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  #pilgrimDetails {
+    margin-top: 15px;
+  }
+  
+  #pilgrimDetails p {
+    margin-bottom: 10px;
+  }
+}
+
+/* زرنسة نصيص فترة الانتظار */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.loading-pulse {
+  animation: pulse 1.5s infinite;
+}
