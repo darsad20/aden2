@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>نظام الرعاية الصحية لحجاج اليمن 1446هـ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="نظام متابعة وإدارة الرعاية الطبية لحجاج الجمهورية اليمنية" />
+    
+    <!-- الخطوط والأنماط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- المكتبات الخارجية -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <!-- التنسيقات المحلية -->
+    <link rel="stylesheet" href="assets/styles/style.css" />
+    <link rel="stylesheet" href="assets/styles/dashboard.css" />
+  </head>
+  <body>
+    <!-- الشريط الجانبي -->
+    <nav id="sidebar" class="sidebar" aria-label="الشريط الجانبي للتنقل">
+      <div class="sidebar-header text-center">
+        <img
+          src="assets/images/pic.png"
+          alt="شعار البعثة الطبية اليمنية"
+          class="img-fluid"
+          width="150"
+          height="100"
+        />
+        <h3 class="slogan mt-3">الرعاية الصحية لحجاج اليمن 1446هـ</h3>
+        <div class="yemen-flag-strip mt-2"></div>
+      </div>
+      <ul class="list-unstyled components">
+        <!-- خيار "بحث حاج" -->
+        <li>
+          <a href="modules/search/search.html" class="nav-link" aria-label="بحث حاج يمني">
+            <i class="fa-solid fa-magnifying-glass me-2"></i> بحث حاج
+          </a>
+        </li>
+        <!-- خيار "التقارير والإحصائيات" -->
+        <li>
+          <a href="modules/reports/reports.html" class="nav-link" aria-label="تقارير حجاج اليمن">
+            <i class="fa-solid fa-chart-bar me-2"></i> التقارير والإحصائيات
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <div class="d-flex justify-content-center align-items-center mb-3">
+          <div class="yemen-badge">
+            <span class="small fw-bold">البعثة الطبية اليمنية</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- زر تبديل الشريط الجانبي للأجهزة المحمولة -->
+    <button 
+      id="sidebarToggle" 
+      class="sidebar-toggle btn btn-gold d-md-none"
+      aria-label="تبديل الشريط الجانبي">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="content" class="content">
+      <header class="d-flex justify-content-between align-items-center p-3 mb-4 border-bottom" aria-label="رأس الصفحة">
+        <div class="d-flex align-items-center">
+          <h1 class="h2">لوحة متابعة الحجاج</h1>
+          <span class="badge bg-success ms-2 season-badge">موسم 1446هـ</span>
+        </div>
+        
+        <div class="d-flex">
+          <!-- زر التحديث -->
+          <button
+            id="refreshBtn"
+            class="btn btn-outline-secondary me-2"
+            aria-label="تحديث البيانات"
+          >
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+          
+          <!-- أيقونة التنبيهات -->
+          <button
+            id="notificationBtn"
+            class="btn btn-outline-gold position-relative"
+            aria-label="عرض التنبيهات"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span id="notificationCount" class="badge bg-danger position-absolute top-0 start-100 translate-middle">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- إحصائيات سريعة (البطاقات الأربع) -->
+      <section class="dashboard-stats container" aria-labelledby="stats-heading">
+        <h2 id="stats-heading" class="section-title mb-3">إحصائيات الحجاج</h2>
+        <div class="row">
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center custom-card stat-card" tabindex="0">
+              <div class="card-body">
+                <div class="stat-icon mb-3">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <h3 class="card-title h5">إجمالي الحجاج</h3>
+                <p id="totalPilgrims" class="display-6">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center custom-card stat-card" tabindex="0">
+              <div class="card-body">
+                <div class="stat-icon mb-3">
+                  <i class="fa-solid fa-kit-medical"></i>
+                </div>
+                <h3 class="card-title h5">عدد الزوار اليومي</h3>
+                <p id="treatedCases" class="display-6">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center custom-card stat-card" tabindex="0">
+              <div class="card-body">
+                <div class="stat-icon mb-3">
+                  <i class="fa-solid fa-hospital"></i>
+                </div>
+                <h3 class="card-title h5">الحالات المحولة</h3>
+                <p id="transferredCases" class="display-6">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center custom-card stat-card" tabindex="0">
+              <div class="card-body">
+                <div class="stat-icon mb-3 text-danger">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h3 class="card-title h5">الوفيات</h3>
+                <p id="deathCount" class="display-6">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- تم حذف الأقسام السفلية:
+           1) قسم المؤشرات والرسوم البيانية
+           2) قسم المحتوى الرئيسي (الحالات العاجلة والتوزيع المناطقي)
+           3) قسم المهام والتذكيرات
+      -->
+    </main>
+
+    <!-- نافذة دليل الاستخدام (ما زالت موجودة إن أردت الاحتفاظ بها) -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="helpModalLabel">دليل استخدام نظام الرعاية الصحية لحجاج اليمن</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+          </div>
+          <div class="modal-body">
+            <div class="accordion" id="helpAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    كيفية البحث عن حاج
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#helpAccordion">
+                  <div class="accordion-body">
+                    يمكنك البحث عن حاج يمني عن طريق الاسم أو رقم الجواز أو رقم تصريح الحج من خلال صفحة "بحث الحاج".
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    إدخال بيانات العلاج
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#helpAccordion">
+                  <div class="accordion-body">
+                    بعد العثور على بيانات الحاج، يمكنك تسجيل الحالة المرضية والعلاج المقدم من خلال صفحة "بيانات العلاج".
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    استخراج التقارير
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#helpAccordion">
+                  <div class="accordion-body">
+                    يمكنك الوصول إلى تقارير متنوعة عن حالات الحجاج اليمنيين من صفحة "التقارير والإحصائيات".
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+            <a href="#" class="btn btn-gold">تحميل الدليل الكامل (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- حاوية التنبيهات -->
+    <div
+      class="toast-container position-fixed top-0 end-0 p-3"
+      id="toastContainer"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <!-- المكتبات والسكريبتات -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"
+      integrity="sha384-CepLK/6iVbK1XnkpEFQJ/FZOqj6VJ1UuK9KR/yMXfa5vgHX1zgsMctFDEo8vUNl9"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
