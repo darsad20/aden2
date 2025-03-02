@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>نظام الرعاية الصحية لحجاج اليمن 1446هـ</title>
+    <!-- تعديل meta viewport للسماح بالتكبير (أفضل لإمكانية الوصول) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="نظام متابعة وإدارة الرعاية الطبية لحجاج الجمهورية اليمنية" />
+    <meta name="theme-color" content="#c8a21d" />
     
     <!-- الخطوط والأنماط -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,6 +36,9 @@
     <link rel="stylesheet" href="assets/styles/dashboard.css" />
   </head>
   <body>
+    <!-- طبقة التعتيم للقائمة الجانبية -->
+    <div class="sidebar-overlay"></div>
+    
     <!-- الشريط الجانبي -->
     <nav id="sidebar" class="sidebar" aria-label="الشريط الجانبي للتنقل">
       <div class="sidebar-header text-center">
@@ -81,13 +86,21 @@
 
     <!-- المحتوى الرئيسي -->
     <main id="content" class="content">
-      <header class="d-flex justify-content-between align-items-center p-3 mb-4 border-bottom" aria-label="رأس الصفحة">
-        <div class="d-flex align-items-center">
+      <header class="d-flex flex-wrap justify-content-between align-items-center p-3 mb-4 border-bottom" aria-label="رأس الصفحة">
+        <div class="d-flex align-items-center mb-2 mb-md-0">
           <h1 class="h2">لوحة متابعة الحجاج</h1>
           <span class="badge bg-success ms-2 season-badge">موسم 1446هـ</span>
         </div>
         
         <div class="d-flex">
+          <!-- زر الشاشة الكاملة (مضاف) -->
+          <button
+            id="fullscreenBtn"
+            class="btn btn-outline-secondary me-2"
+            aria-label="تفعيل وضع الشاشة الكاملة">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+          
           <!-- زر التحديث -->
           <button
             id="refreshBtn"
@@ -112,8 +125,8 @@
       <!-- إحصائيات سريعة (البطاقات الأربع) -->
       <section class="dashboard-stats container" aria-labelledby="stats-heading">
         <h2 id="stats-heading" class="section-title mb-3">إحصائيات الحجاج</h2>
-        <div class="row">
-          <div class="col-md-3 col-sm-6 mb-3">
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
             <div class="card text-center custom-card stat-card" tabindex="0">
               <div class="card-body">
                 <div class="stat-icon mb-3">
@@ -124,7 +137,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-3">
+          <div class="col-6 col-md-3">
             <div class="card text-center custom-card stat-card" tabindex="0">
               <div class="card-body">
                 <div class="stat-icon mb-3">
@@ -135,7 +148,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-3">
+          <div class="col-6 col-md-3">
             <div class="card text-center custom-card stat-card" tabindex="0">
               <div class="card-body">
                 <div class="stat-icon mb-3">
@@ -146,7 +159,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-3">
+          <div class="col-6 col-md-3">
             <div class="card text-center custom-card stat-card" tabindex="0">
               <div class="card-body">
                 <div class="stat-icon mb-3 text-danger">
@@ -160,14 +173,28 @@
         </div>
       </section>
 
-      <!-- تم حذف الأقسام السفلية:
-           1) قسم المؤشرات والرسوم البيانية
-           2) قسم المحتوى الرئيسي (الحالات العاجلة والتوزيع المناطقي)
-           3) قسم المهام والتذكيرات
-      -->
+      <!-- إضافة قسم للربط السريع للأجهزة المحمولة -->
+      <section class="d-md-none mt-4">
+        <div class="container">
+          <div class="row g-3">
+            <div class="col-6">
+              <a href="modules/search/search.html" class="btn btn-gold w-100 py-3">
+                <i class="fa-solid fa-magnifying-glass mb-2 d-block" style="font-size: 1.5rem;"></i>
+                بحث حاج
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="modules/reports/reports.html" class="btn btn-outline-gold w-100 py-3">
+                <i class="fa-solid fa-chart-bar mb-2 d-block" style="font-size: 1.5rem;"></i>
+                التقارير
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- نافذة دليل الاستخدام (ما زالت موجودة إن أردت الاحتفاظ بها) -->
+    <!-- نافذة دليل الاستخدام -->
     <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -237,10 +264,12 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+    <!-- تحميل ChartJS بخاصية defer لتحسين الأداء -->
     <script
       src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"
       integrity="sha384-CepLK/6iVbK1XnkpEFQJ/FZOqj6VJ1UuK9KR/yMXfa5vgHX1zgsMctFDEo8vUNl9"
       crossorigin="anonymous"
+      defer
     ></script>
     <script src="js/dashboard.js"></script>
   </body>

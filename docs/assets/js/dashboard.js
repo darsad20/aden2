@@ -13,11 +13,78 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function initializeDashboard() {
   updateStatisticsData();
-  // تم حذف استدعاء الدوال الخاصة بالرسم البياني لأنها تمثل أقساماً أسفل البطاقات
   setupNotificationSystem();
   setupMobileNavigation();
   enhanceAccessibility();
   setupEventListeners();
+  
+  // إضافة معالج لتغيير حجم النافذة للتأكد من الاستجابة المستمرة
+  window.addEventListener('resize', handleWindowResize);
+  
+  // التحقق من حجم الشاشة عند بدء التشغيل
+  handleWindowResize();
+}
+
+/**
+ * معالجة تغيير حجم النافذة وتطبيق التغييرات اللازمة
+ */
+function handleWindowResize() {
+  const sidebar = document.getElementById("sidebar");
+  const content = document.getElementById("content");
+  const overlay = document.querySelector('.sidebar-overlay');
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  
+  if (!sidebar || !content) return;
+  
+  if (window.innerWidth > 768) {
+    // للشاشات الكبيرة
+    sidebar.classList.remove("show");
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // إعادة ضبط أيقونة الزر
+    if (sidebarToggle) {
+      const icon = sidebarToggle.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
+      }
+    }
+    
+    // تعديل حجم الخط والمسافات للشاشات الكبيرة
+    adjustUIForLargeScreens();
+  } else {
+    // للشاشات الصغيرة
+    adjustUIForSmallScreens();
+  }
+}
+
+/**
+ * ضبط واجهة المستخدم للشاشات الكبيرة
+ */
+function adjustUIForLargeScreens() {
+  // تعديل حجم البطاقات والمسافات للشاشات الكبيرة
+  document.querySelectorAll('.stat-card .display-6').forEach(el => {
+    el.style.fontSize = '2.4rem';
+  });
+  
+  document.querySelectorAll('.stat-card .card-body').forEach(el => {
+    el.style.padding = '1.8rem 1.5rem';
+  });
+}
+
+/**
+ * ضبط واجهة المستخدم للشاشات الصغيرة
+ */
+function adjustUIForSmallScreens() {
+  // تعديل حجم البطاقات والمسافات للشاشات الصغيرة
+  document.querySelectorAll('.stat-card .display-6').forEach(el => {
+    el.style.fontSize = '1.8rem';
+  });
+  
+  document.querySelectorAll('.stat-card .card-body').forEach(el => {
+    el.style.padding = '1.2rem 1rem';
+  });
 }
 
 /**
@@ -27,16 +94,23 @@ function initializeDashboard() {
 function updateStatisticsData() {
   const baseUrl = 'https://script.google.com/macros/s/AKfycbzy-SYwUOW-0jAOvZHT6Q1MKxwm7PIXgRe4dia4NVoD6dBzxP2PyD_i9yGF0IKlnwrg/exec';
 
+  // إظهار مؤشر التحميل على البطاقات
+  document.querySelectorAll('.stat-card .display-6').forEach(el => {
+    el.classList.add('loading-pulse');
+  });
+
   // تحديث إجمالي الحجاج
   fetch(`${baseUrl}?action=getTotalPilgrims`)
     .then(response => response.json())
     .then(data => {
       const totalPilgrims = typeof data === 'number' ? data : 0;
       animateCounter("totalPilgrims", totalPilgrims);
+      document.getElementById("totalPilgrims")?.classList.remove('loading-pulse');
     })
     .catch(error => {
       console.error("Error fetching totalPilgrims:", error);
       animateCounter("totalPilgrims", 0);
+      document.getElementById("totalPilgrims")?.classList.remove('loading-pulse');
     });
 
   // تحديث عدد الزوار اليومي (تصفية بناءً على تاريخ اليوم)
@@ -48,10 +122,12 @@ function updateStatisticsData() {
         ? data.filter(row => row["التاريخ"] && row["التاريخ"].includes(today))
         : [];
       animateCounter("treatedCases", dailyVisitors.length);
+      document.getElementById("treatedCases")?.classList.remove('loading-pulse');
     })
     .catch(error => {
       console.error("Error fetching dailyVisitors:", error);
       animateCounter("treatedCases", 0);
+      document.getElementById("treatedCases")?.classList.remove('loading-pulse');
     });
 
   // تحديث الحالات المحولة
@@ -60,10 +136,12 @@ function updateStatisticsData() {
     .then(data => {
       const transferredCases = Array.isArray(data) ? data.length : 0;
       animateCounter("transferredCases", transferredCases);
+      document.getElementById("transferredCases")?.classList.remove('loading-pulse');
     })
     .catch(error => {
       console.error("Error fetching transferredCases:", error);
       animateCounter("transferredCases", 0);
+      document.getElementById("transferredCases")?.classList.remove('loading-pulse');
     });
 
   // تحديث عدد الوفيات
@@ -72,13 +150,15 @@ function updateStatisticsData() {
     .then(data => {
       const deathCount = Array.isArray(data) ? data.length : 0;
       animateCounter("deathCount", deathCount);
+      document.getElementById("deathCount")?.classList.remove('loading-pulse');
     })
     .catch(error => {
       console.error("Error fetching deathReport:", error);
       animateCounter("deathCount", 0);
+      document.getElementById("deathCount")?.classList.remove('loading-pulse');
     });
 
-  // تحديث عدد التنبيهات (يمكن تعديل هذا الجزء حسب الحاجة)
+  // تحديث عدد التنبيهات
   const notificationBadge = document.getElementById("notificationCount");
   if (notificationBadge) {
     notificationBadge.innerText = "5";
@@ -175,7 +255,9 @@ function setupNotificationSystem() {
     });
   }
 
-  notifications.slice(0, 3).forEach((notif) => showNotification(notif, toastContainer));
+  // عرض أول 3 تنبيهات فقط في الشاشات الكبيرة، وأول تنبيهين فقط في الشاشات الصغيرة
+  const displayCount = window.innerWidth <= 768 ? 2 : 3;
+  notifications.slice(0, displayCount).forEach((notif) => showNotification(notif, toastContainer));
 }
 
 /**
@@ -277,9 +359,47 @@ function setupMobileNavigation() {
   
   if (!sidebarToggle || !sidebar || !content) return;
   
-  sidebarToggle.addEventListener("click", () => {
+  // إنشاء طبقة التعتيم إذا لم تكن موجودة
+  let overlay = document.querySelector('.sidebar-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+    
+    // دعم اللمس في الأجهزة المحمولة
+    overlay.addEventListener('touchstart', function(e) {
+      if (sidebar.classList.contains("show")) {
+        e.preventDefault();
+        sidebar.classList.remove("show");
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        const icon = sidebarToggle.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      }
+    });
+  }
+  
+  // تبديل حالة القائمة الجانبية عند النقر على الزر
+  sidebarToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     sidebar.classList.toggle("show");
     
+    // تبديل طبقة التعتيم
+    if (sidebar.classList.contains("show")) {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // منع التمرير عند فتح القائمة
+    } else {
+      overlay.classList.remove('active');
+      document.body.style.overflow = ''; // السماح بالتمرير عند إغلاق القائمة
+    }
+    
+    // تغيير أيقونة الزر
     const icon = sidebarToggle.querySelector("i");
     if (icon) {
       if (sidebar.classList.contains("show")) {
@@ -292,13 +412,22 @@ function setupMobileNavigation() {
     }
   });
   
-  document.addEventListener("click", (e) => {
-    if (window.innerWidth <= 768 && 
-        sidebar.classList.contains("show") && 
-        !sidebar.contains(e.target) && 
-        e.target !== sidebarToggle &&
-        !sidebarToggle.contains(e.target)) {
+  // إضافة دعم حركات السحب للأجهزة اللمسية
+  let touchStartX = 0;
+  
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  document.addEventListener('touchend', function(e) {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchDistance = touchEndX - touchStartX;
+    
+    // سحب من اليمين إلى اليسار (إغلاق القائمة)
+    if (touchDistance < -50 && sidebar.classList.contains("show") && window.innerWidth <= 768) {
       sidebar.classList.remove("show");
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
       
       const icon = sidebarToggle.querySelector("i");
       if (icon) {
@@ -306,6 +435,76 @@ function setupMobileNavigation() {
         icon.classList.add("fa-bars");
       }
     }
+    
+    // سحب من اليسار إلى اليمين (فتح القائمة)
+    if (touchDistance > 50 && !sidebar.classList.contains("show") && window.innerWidth <= 768) {
+      sidebar.classList.add("show");
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      const icon = sidebarToggle.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-xmark");
+      }
+    }
+  }, { passive: true });
+  
+  // إغلاق القائمة عند النقر على طبقة التعتيم
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove("show");
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    const icon = sidebarToggle.querySelector("i");
+    if (icon) {
+      icon.classList.remove("fa-xmark");
+      icon.classList.add("fa-bars");
+    }
+  });
+  
+  // إغلاق القائمة عند النقر خارجها
+  document.addEventListener("click", (e) => {
+    if (window.innerWidth <= 768 && 
+        sidebar.classList.contains("show") && 
+        !sidebar.contains(e.target) && 
+        e.target !== sidebarToggle &&
+        !sidebarToggle.contains(e.target) &&
+        e.target !== overlay) {
+      sidebar.classList.remove("show");
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      const icon = sidebarToggle.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
+      }
+    }
+  });
+  
+  // إغلاق القائمة عند النقر على روابط القائمة في وضع الموبايل
+  document.querySelectorAll('#sidebar a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768 && sidebar.classList.contains("show")) {
+        sidebar.classList.remove("show");
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        const icon = sidebarToggle.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      }
+    });
+  });
+  
+  // معالجة تغيير اتجاه الشاشة (orientation change)
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      handleWindowResize();
+    }, 200); // تأخير قصير للسماح للمتصفح بإكمال تغيير الاتجاه
   });
 }
 
@@ -340,8 +539,8 @@ function enhanceAccessibility() {
   });
   
   document.querySelectorAll('.stat-card').forEach((card) => {
-    const title = card.querySelector('.card-title').textContent;
-    const value = card.querySelector('.display-6').textContent;
+    const title = card.querySelector('.card-title')?.textContent || '';
+    const value = card.querySelector('.display-6')?.textContent || '';
     card.setAttribute('aria-label', `${title}: ${value}`);
   });
 
@@ -352,6 +551,17 @@ function enhanceAccessibility() {
         button.setAttribute('aria-label', text);
       }
     }
+  });
+  
+  // إضافة وسائل تفاعل للموبايل
+  document.querySelectorAll('.nav-link, .btn, .card').forEach(el => {
+    el.addEventListener('touchstart', function() {
+      this.classList.add('touch-active');
+    }, { passive: true });
+    
+    el.addEventListener('touchend', function() {
+      this.classList.remove('touch-active');
+    }, { passive: true });
   });
 }
 
@@ -366,6 +576,9 @@ function setupEventListeners() {
       if (icon) {
         icon.classList.add("fa-spin");
       }
+      
+      // تعطيل الزر أثناء التحديث
+      this.disabled = true;
       
       setTimeout(() => {
         updateStatisticsData();
@@ -383,6 +596,9 @@ function setupEventListeners() {
         if (icon) {
           icon.classList.remove("fa-spin");
         }
+        
+        // إعادة تفعيل الزر
+        this.disabled = false;
       }, 1500);
     });
   }
@@ -403,4 +619,51 @@ function setupEventListeners() {
       helpModal.show();
     }
   });
+  
+  // إضافة مستمعي أحداث الشاشة الكاملة
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', toggleFullScreen);
+  }
+  
+  // إضافة مستمع لحدث تغيير حالة الشاشة الكاملة
+  document.addEventListener('fullscreenchange', updateFullscreenButtonIcon);
+}
+
+/**
+ * تبديل وضع الشاشة الكاملة
+ */
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    // دخول وضع الشاشة الكاملة
+    document.documentElement.requestFullscreen().catch(err => {
+      console.error(`خطأ في تفعيل الشاشة الكاملة: ${err.message}`);
+    });
+  } else {
+    // الخروج من وضع الشاشة الكاملة
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+/**
+ * تحديث أيقونة زر الشاشة الكاملة
+ */
+function updateFullscreenButtonIcon() {
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  if (!fullscreenBtn) return;
+  
+  const icon = fullscreenBtn.querySelector('i');
+  if (!icon) return;
+  
+  if (document.fullscreenElement) {
+    icon.classList.remove('fa-expand');
+    icon.classList.add('fa-compress');
+    fullscreenBtn.setAttribute('aria-label', 'الخروج من وضع الشاشة الكاملة');
+  } else {
+    icon.classList.remove('fa-compress');
+    icon.classList.add('fa-expand');
+    fullscreenBtn.setAttribute('aria-label', 'تفعيل وضع الشاشة الكاملة');
+  }
 }

@@ -29,6 +29,7 @@ html, body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* منع التمرير الأفقي */
 }
 
 /* النصوص والعناوين */
@@ -344,6 +345,115 @@ a:hover, a:focus {
   margin-left: 0;
 }
 
+/* تحسينات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .toast-container {
+    padding: 10px;
+    max-width: 100%;
+  }
+  
+  .toast {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .modal-dialog {
+    margin: 10px;
+  }
+  
+   /* تحسين حجم الأزرار للمس */
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* تحسين المسافات في النماذج */
+  .form-control, .form-select {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  /* تحسين حجم الخط في العناوين */
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+  }
+  
+  /* تحسين الجداول للشاشات الصغيرة */
+  .table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* تحسين حجم التنبيهات */
+  .toast {
+    font-size: 0.9rem;
+  }
+  
+  /* تحسين المسافات في البطاقات */
+  .card-body {
+    padding: 1.2rem;
+  }
+  
+  /* تحسين حجم الأيقونات */
+  .fa, .fas, .far, .fab {
+    font-size: 1.1rem;
+  }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جدًا */
+@media (max-width: 576px) {
+  body {
+    font-size: 13px;
+  }
+  
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .modal-header, .modal-footer {
+    padding: 0.8rem 1rem;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+}
+
 /* توافق الطباعة */
 @media print {
   body {
@@ -383,5 +493,39 @@ a:hover, a:focus {
     margin-top: 20px;
     border-top: 1px solid #ddd;
     padding-top: 10px;
+  }
+/* تحسين دعم الشاشات الصغيرة جدًا */
+@media (max-width: 375px) {
+  body {
+    font-size: 12px;
+  }
+  
+  .container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  
+  .form-control, .form-select {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* تحسينات لدعم الشاشات عالية الدقة */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+  .btn, .card, .form-control {
+    border-width: 0.5px;
+  }
+}
+
+/* دعم حالة الجهاز العمودية والأفقية */
+@media screen and (orientation: landscape) {
+  .modal-dialog {
+    max-width: 90vh;
   }
 }

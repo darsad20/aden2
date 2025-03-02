@@ -4,12 +4,12 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: 0; /* RTL تعديل للغة العربية */
+  right: 0; /* القيمة الافتراضية للكمبيوتر */
   height: 100vh;
   width: 280px;
   background-color: #f8f9fa;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.97));
-  border-left: 1px solid #e5e5e5; /* RTL تعديل للغة العربية */
+  border-left: 1px solid #e5e5e5;
   padding: 20px 0;
   overflow-y: auto;
   z-index: 1000;
@@ -108,7 +108,7 @@
 
 /* تنسيق المحتوى الرئيسي */
 .content {
-  margin-right: 280px; /* RTL تعديل للغة العربية */
+  margin-right: 280px; /* هامش للشاشات الكبيرة */
   padding: 20px;
   transition: all 0.3s ease;
 }
@@ -244,6 +244,25 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* طبقة التعتيم خلف القائمة الجانبية */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
 /* توافق الأجهزة المحمولة */
 @media (max-width: 992px) {
   .sidebar {
@@ -270,20 +289,18 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 0;
-    padding: 0;
-    overflow: hidden;
-    opacity: 0;
+    right: -280px; /* إخفاء القائمة افتراضيًا فقط في الأجهزة المحمولة */
+    width: 280px;
+    opacity: 1;
+    padding: 20px 0;
   }
   
   .sidebar.show {
-    width: 280px;
-    padding: 20px 0;
-    opacity: 1;
+    right: 0; /* إظهار القائمة عند التفعيل */
   }
   
   .content {
-    margin-right: 0;
+    margin-right: 0; /* إزالة الهامش في الأجهزة المحمولة */
   }
   
   /* إظهار زر القائمة على الأجهزة المحمولة */
@@ -293,6 +310,38 @@
   
   .section-title {
     font-size: 1.2rem;
+  }
+  
+  /* تحسينات إضافية للموبايل */
+  .dashboard-stats .row {
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+  
+  .dashboard-stats .col-md-3 {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .stat-card {
+    margin-bottom: 15px;
+  }
+  
+  .stat-card .card-body {
+    padding: 1.2rem 1rem;
+  }
+  
+  .stat-card .display-6 {
+    font-size: 1.8rem;
+  }
+  
+  header {
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  header h1 {
+    font-size: 1.3rem;
   }
 }
 
@@ -340,5 +389,64 @@
     text-align: center;
     margin: 20px 0;
     color: #000;
+  }
+/* تحسينات للأجهزة المحمولة الصغيرة جدًا */
+@media (max-width: 480px) {
+  .sidebar.show {
+    width: 85%; /* تقليل عرض القائمة الجانبية على الشاشات الصغيرة جدًا */
+  }
+  
+  .stat-card .card-body {
+    padding: 1rem 0.75rem;
+  }
+  
+  .stat-card .display-6 {
+    font-size: 1.5rem;
+  }
+  
+  .stat-card .stat-icon {
+    font-size: 1.8rem;
+  }
+  
+  .toast {
+    min-width: auto;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .card-header {
+    padding: 0.7rem 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* دعم الأجهزة اللمسية */
+@media (hover: none) {
+  .sidebar .components li a:active,
+  .stat-card:active {
+    background-color: rgba(200, 162, 29, 0.15);
+  }
+  
+  .touch-active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* دعم تغيير اتجاه الشاشة */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .sidebar {
+    padding-top: 10px;
+  }
+  
+  .sidebar .sidebar-header {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar .components li a {
+    padding: 8px 20px;
   }
 }

@@ -713,4 +713,49 @@ body {
     size: A4;
     margin: 1.5cm;
   }
+/* تحسينات للأجهزة المحمولة الصغيرة جدًا */
+@media (max-width: 480px) {
+  .search-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .search-header p {
+    font-size: 0.9rem;
+  }
+  
+  .table-container {
+    border-radius: 8px;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .pilgrim-section {
+    padding: 0.8rem;
+  }
+  
+  .pilgrim-section h4 {
+    font-size: 1rem;
+  }
+  
+  .pilgrim-data-table th, 
+  .pilgrim-data-table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* تحسينات للأجهزة اللوحية */
+@media (min-width: 768px) and (max-width: 992px) {
+  .card-footer {
+    flex-wrap: wrap;
+  }
+  
+  .card-footer .btn {
+    flex: 0 0 calc(50% - 10px);
+    margin-bottom: 10px;
+  }
 }
