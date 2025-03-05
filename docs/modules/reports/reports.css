@@ -1,6 +1,6 @@
 /* تنسيقات نظام التقارير - reports.css */
 
-/* --------- تنسيقات عامة --------- */
+/* --------- المتغيرات --------- */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #34495e;
@@ -9,15 +9,32 @@
   --warning-color: #f39c12;
   --danger-color: #e74c3c;
   --light-bg: #f8f9fa;
+  --light-card-bg: #ffffff;
+  --light-text: #333333;
+  --light-border: #e0e0e0;
+  --light-hover: #f5f5f5;
+  --dark-bg: #222831;
+  --dark-card-bg: #393e46;
+  --dark-text: #eeeeee;
+  --dark-border: #4f5965;
+  --dark-hover: #4f5965;
   --border-radius: 8px;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
   --transition: all 0.3s ease;
 }
 
+/* --------- تنسيقات عامة --------- */
 body {
   font-family: 'Tajawal', sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  transition: var(--transition);
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
 }
 
 .main-container {
@@ -40,6 +57,11 @@ body {
   margin-bottom: 0;
   position: relative;
   display: inline-block;
+  transition: var(--transition);
+}
+
+.dark-mode .page-title {
+  color: var(--dark-text);
 }
 
 .page-title::after {
@@ -70,7 +92,7 @@ body {
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--box-shadow-hover);
 }
 
 .stat-icon {
@@ -103,21 +125,77 @@ body {
 /* --------- البطاقات --------- */
 .card {
   border-radius: var(--border-radius);
-  border: none;
+  border: 1px solid var(--light-border);
   box-shadow: var(--box-shadow);
   overflow: hidden;
   margin-bottom: 1.5rem;
+  background-color: var(--light-card-bg);
+  transition: var(--transition);
+}
+
+.dark-mode .card {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border);
 }
 
 .card-header {
   padding: 0.8rem 1.25rem;
   font-weight: 500;
   background-color: var(--light-bg);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+  border-bottom: 1px solid var(--light-border);
+  transition: var(--transition);
+}
+
+.dark-mode .card-header {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom-color: var(--dark-border);
+  color: var(--dark-text);
 }
 
 .filter-card .card-header {
   cursor: pointer;
+}
+
+/* --------- لوحة المعلومات التفاعلية --------- */
+.chart-container {
+  position: relative;
+  height: 250px;
+  margin-bottom: 1.5rem;
+}
+
+.info-panel {
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.dark-mode .info-panel {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--light-border);
+  padding-bottom: 8px;
+  transition: var(--transition);
+}
+
+.dark-mode .panel-title {
+  color: var(--dark-text);
+  border-bottom-color: var(--dark-border);
+}
+
+.inventory-item {
+  margin-bottom: 10px;
+}
+
+.inventory-item:last-child {
+  margin-bottom: 0;
 }
 
 /* --------- الجدول --------- */
@@ -132,19 +210,36 @@ body {
 .reports-card .table th {
   font-weight: 600;
   white-space: nowrap;
-  background-color: #f8f9fa;
+  background-color: var(--light-bg);
   padding: 0.75rem 1rem;
   vertical-align: middle;
+  transition: var(--transition);
+}
+
+.dark-mode .reports-card .table th {
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-border);
 }
 
 .reports-card .table td {
   padding: 0.75rem 1rem;
   vertical-align: middle;
+  transition: var(--transition);
+}
+
+.dark-mode .reports-card .table td {
+  color: var(--dark-text);
+  border-color: var(--dark-border);
 }
 
 .table-responsive {
   scrollbar-width: thin;
   scrollbar-color: #ccc #f5f5f5;
+}
+
+.dark-mode .table-responsive {
+  scrollbar-color: #666 #333;
 }
 
 .table-responsive::-webkit-scrollbar {
@@ -157,13 +252,110 @@ body {
   border-radius: 10px;
 }
 
+.dark-mode .table-responsive::-webkit-scrollbar-track {
+  background: #333;
+}
+
 .table-responsive::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
 }
 
+.dark-mode .table-responsive::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .table-hover > tbody > tr:hover > * {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --------- عرض البطاقات --------- */
+.patient-card {
+  border: 1px solid var(--light-border);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: var(--light-card-bg);
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}
+
+.dark-mode .patient-card {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border);
+}
+
+.patient-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.patient-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--light-border);
+  padding-bottom: 10px;
+}
+
+.dark-mode .patient-card-header {
+  border-bottom-color: var(--dark-border);
+}
+
+.patient-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.dark-mode .patient-name {
+  color: var(--dark-text);
+}
+
+.patient-data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.patient-label {
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.dark-mode .patient-label {
+  color: #adb5bd;
+}
+
+.patient-value {
+  text-align: start;
+}
+
+.patient-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--light-border);
+}
+
+.dark-mode .patient-card-footer {
+  border-top-color: var(--dark-border);
+}
+
+.patient-card-actions {
+  display: flex;
+  gap: 5px;
 }
 
 /* --------- نموذج الفلترة --------- */
@@ -171,12 +363,26 @@ body {
   font-weight: 500;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.dark-mode .form-label {
+  color: var(--dark-text);
 }
 
 .form-select, .form-control {
   padding: 0.5rem 1rem;
-  border-color: #e0e0e0;
+  border-color: var(--light-border);
   font-size: 0.95rem;
+  transition: var(--transition);
+  background-color: var(--light-card-bg);
+  color: var(--light-text);
+}
+
+.dark-mode .form-select, .dark-mode .form-control {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
 }
 
 .form-select:focus, .form-control:focus {
@@ -184,29 +390,205 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
 
+.dark-mode .form-select option {
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text);
+}
+
 .input-group-text {
-  background-color: #f8f9fa;
-  border-color: #e0e0e0;
+  background-color: var(--light-bg);
+  border-color: var(--light-border);
+  transition: var(--transition);
+}
+
+.dark-mode .input-group-text {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+/* --------- معلومات المنشأة --------- */
+#facilityInfo p {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+#facilityInfo .text-primary {
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.dark-mode #facilityInfo .text-primary {
+  color: #5dade2 !important;
+}
+
+#reportInfo {
+  font-size: 0.9rem;
+  color: #6c757d;
+  transition: var(--transition);
+}
+
+.dark-mode #reportInfo {
+  color: #adb5bd;
 }
 
 /* --------- التصفح --------- */
 .pagination .page-link {
   color: var(--primary-color);
-  border-color: #dee2e6;
+  border-color: var(--light-border);
   padding: 0.375rem 0.75rem;
+  transition: var(--transition);
+}
+
+.dark-mode .pagination .page-link {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
 }
 
 .pagination .page-item.active .page-link {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
+  color: white;
 }
 
 .pagination-info {
   font-size: 0.9rem;
   color: #6c757d;
+  transition: var(--transition);
 }
 
-/* (تم حذف تنسيقات "التحقق الإلكتروني" و "معلومات التقرير") */
+.dark-mode .pagination-info {
+  color: #adb5bd;
+}
+
+/* --------- الموديل --------- */
+.modal-content {
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.dark-mode .modal-content {
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text);
+}
+
+.modal-header {
+  border-bottom-color: var(--light-border);
+  transition: var(--transition);
+}
+
+.dark-mode .modal-header {
+  border-bottom-color: var(--dark-border);
+}
+
+.modal-footer {
+  border-top-color: var(--light-border);
+  transition: var(--transition);
+}
+
+.dark-mode .modal-footer {
+  border-top-color: var(--dark-border);
+}
+
+.dark-mode .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* --------- تاريخ العلاج --------- */
+.treatment-timeline {
+  position: relative;
+}
+
+.timeline-header {
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--light-border);
+  transition: var(--transition);
+}
+
+.dark-mode .timeline-header {
+  border-bottom-color: var(--dark-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+  padding-right: 30px;
+  margin-bottom: 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  z-index: 1;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  height: 100%;
+  width: 1px;
+  background-color: var(--light-border);
+}
+
+.dark-mode .timeline-item::after {
+  background-color: var(--dark-border);
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 5px;
+  transition: var(--transition);
+}
+
+.dark-mode .timeline-date {
+  color: #adb5bd;
+}
+
+.timeline-content {
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius);
+  padding: 12px;
+  transition: var(--transition);
+}
+
+.dark-mode .timeline-content {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --------- زر تبديل الوضع المظلم --------- */
+#darkModeToggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.dark-mode #darkModeToggle {
+  background-color: var(--dark-text);
+  color: var(--dark-bg);
+  border-color: var(--dark-text);
+}
 
 /* --------- Loading Overlay --------- */
 .loading-overlay {
@@ -220,6 +602,11 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  transition: var(--transition);
+}
+
+.dark-mode .loading-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .spinner-container {
@@ -228,18 +615,30 @@ body {
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.dark-mode .spinner-container {
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text);
 }
 
 .spinner-container p {
   margin-top: 1rem;
   color: var(--primary-color);
   font-weight: 500;
+  transition: var(--transition);
+}
+
+.dark-mode .spinner-container p {
+  color: var(--dark-text);
 }
 
 /* --------- Print Styles --------- */
 @media print {
   body {
     background-color: white;
+    color: black;
   }
   
   .main-container {
@@ -247,7 +646,7 @@ body {
   }
   
   .dashboard-actions, .filter-card, .pagination, 
-  #exportExcelBtn, #loadingOverlay {
+  #exportExcelBtn, #loadingOverlay, .view-toggle {
     display: none !important;
   }
   
@@ -282,6 +681,26 @@ body {
   .page-title::after {
     background-color: black;
   }
+  
+  /* تنسيقات طباعة معلومات المنشأة */
+  #facilityInfo p {
+    color: black !important;
+    margin-bottom: 0.25rem;
+  }
+  
+  #facilityInfo .text-primary {
+    color: black !important;
+    font-weight: bold;
+  }
+  
+  /* إظهار عرض الجدول فقط عند الطباعة */
+  #cardViewContainer {
+    display: none !important;
+  }
+  
+  #tableViewContainer {
+    display: block !important;
+  }
 }
 
 /* --------- Responsive Styles --------- */
@@ -313,10 +732,21 @@ body {
   .stat-content h3 {
     font-size: 1.5rem;
   }
+  
+  /* تبديل عرض الجدول إلى عرض البطاقات تلقائياً في الأجهزة الصغيرة */
+  #tableViewContainer {
+    display: none;
+  }
+  
+  #cardViewContainer {
+    display: flex !important;
+  }
+}
+
 /* تحسينات للأجهزة الصغيرة جدًا */
 @media (max-width: 480px) {
   .page-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .stat-card {
@@ -330,7 +760,7 @@ body {
   }
   
   .stat-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .card-header {
@@ -338,13 +768,25 @@ body {
     font-size: 0.9rem;
   }
   
-  .table th, .table td {
-    padding: 0.6rem 0.5rem;
+  .form-label {
     font-size: 0.85rem;
   }
   
-  .form-label {
-    font-size: 0.85rem;
+  .patient-card {
+    padding: 10px;
+  }
+  
+  .patient-name {
+    font-size: 1rem;
+  }
+  
+  .patient-data-row {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .patient-label {
+    margin-bottom: 2px;
   }
 }
 

@@ -1,7 +1,7 @@
 :root {
   /* ألوان مستوحاة من الشعار وألوان علم اليمن */
   --gold-color: #c8a21d;
-  --gold-hover: #dbb222; 
+  --gold-hover: #dbb222;
   --gold-light: rgba(200, 162, 29, 0.15);
   --yemen-red: #CE1126;
   --yemen-black: #000000;
@@ -30,6 +30,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden; /* منع التمرير الأفقي */
+  scroll-behavior: smooth;
 }
 
 /* النصوص والعناوين */
@@ -42,12 +43,13 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: var(--gold-color);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
 }
 
 a:hover, a:focus {
   color: var(--gold-hover);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
 /* الكروت العامة */
@@ -58,7 +60,7 @@ a:hover, a:focus {
   margin: 20px auto;
   padding: 0;
   box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
@@ -96,16 +98,39 @@ a:hover, a:focus {
 
 /* أزرار مخصصة */
 .btn-gold {
-  background-color: var(--gold-color);
+  background: linear-gradient(135deg, var(--gold-color), #e0b726);
   color: white;
   border: none;
   font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-gold:hover, .btn-gold:focus {
-  background-color: var(--gold-hover);
+  background: linear-gradient(135deg, #e0b726, var(--gold-color));
   color: white;
   box-shadow: 0 4px 8px rgba(200, 162, 29, 0.3);
+  transform: translateY(-3px);
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(0);
+  opacity: 0;
+  border-radius: 50%;
+  transition: transform 0.5s, opacity 0.3s;
+}
+
+.btn-gold:active::before {
+  transform: scale(2);
+  opacity: 1;
 }
 
 .btn-outline-gold {
@@ -113,20 +138,25 @@ a:hover, a:focus {
   color: var(--gold-color);
   background-color: transparent;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-gold:hover, .btn-outline-gold:focus {
   background-color: var(--gold-color);
   color: #fff;
   box-shadow: 0 4px 8px rgba(200, 162, 29, 0.3);
+  transform: translateY(-3px);
 }
 
 /* نظام التنبيهات */
 .toast {
   min-width: 300px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   font-size: 0.95rem;
+  border: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .toast-header {
@@ -182,13 +212,14 @@ a:hover, a:focus {
   padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   background-color: #fff;
 }
 
 .form-control:focus, .form-select:focus {
   border-color: var(--gold-color);
   box-shadow: 0 0 0 3px rgba(200, 162, 29, 0.3);
+  transform: translateY(-2px);
 }
 
 .form-label {
@@ -227,11 +258,14 @@ a:hover, a:focus {
   border: none;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .btn-yemen:hover, .btn-yemen:focus {
   opacity: 0.9;
   color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-yemen::after {
@@ -250,7 +284,7 @@ a:hover, a:focus {
   transform: translateX(0);
 }
 
-/* أستحسان للهوية البصرية */
+/* استحسان للهوية البصرية */
 .slogan {
   color: var(--gold-color);
   font-weight: 700;
@@ -262,10 +296,12 @@ a:hover, a:focus {
 .list-group-item {
   padding: 1rem 1.25rem;
   border-color: var(--border-color);
+  transition: all 0.25s ease;
 }
 
 .list-group-item-action:hover {
   background-color: rgba(200, 162, 29, 0.05);
+  transform: translateX(-5px);
 }
 
 /* تباين عالي للنصوص - وضع إمكانية الوصول */
@@ -274,15 +310,12 @@ a:hover, a:focus {
   color: #fff;
 }
 
-.high-contrast .card, 
-.high-contrast .sidebar,
-.high-contrast .content {
+.high-contrast .card, .high-contrast .sidebar, .high-contrast .content {
   background-color: #1a1a1a;
   color: #fff;
 }
 
-.high-contrast .border-bottom,
-.high-contrast .border-top {
+.high-contrast .border-bottom, .high-contrast .border-top {
   border-color: #444 !important;
 }
 
@@ -323,11 +356,18 @@ a:hover, a:focus {
   overflow: hidden;
   margin-bottom: 8px;
   border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-button {
   font-weight: 600;
   padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
 }
 
 .accordion-button:not(.collapsed) {
@@ -343,6 +383,7 @@ a:hover, a:focus {
 .accordion-button::after {
   margin-right: auto;
   margin-left: 0;
+  transition: transform 0.3s ease;
 }
 
 /* تحسينات للأجهزة المحمولة */
@@ -368,12 +409,14 @@ a:hover, a:focus {
   
   .modal-dialog {
     margin: 10px;
+    max-width: 95%;
   }
   
    /* تحسين حجم الأزرار للمس */
   .btn {
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
+    touch-action: manipulation;
   }
   
   /* تحسين المسافات في النماذج */
@@ -399,6 +442,7 @@ a:hover, a:focus {
   .table-responsive {
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
   }
   
   /* تحسين حجم التنبيهات */
@@ -414,6 +458,11 @@ a:hover, a:focus {
   /* تحسين حجم الأيقونات */
   .fa, .fas, .far, .fab {
     font-size: 1.1rem;
+  }
+  
+  /* تحسين التفاعلية */
+  .btn:active, .card:active {
+    transform: scale(0.98);
   }
 }
 
@@ -451,6 +500,29 @@ a:hover, a:focus {
   
   .modal-body {
     padding: 1rem;
+  }
+  
+  /* تحسين ظهور الروابط والعناصر التفاعلية */
+  a, button, .btn, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* تحسين المسافات بين العناصر */
+  .mb-3 {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .mt-3 {
+    margin-top: 0.75rem !important;
+  }
+  
+  .py-3 {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
   }
 }
 
@@ -494,6 +566,14 @@ a:hover, a:focus {
     border-top: 1px solid #ddd;
     padding-top: 10px;
   }
+  
+  /* إزالة التأثيرات غير المطلوبة عند الطباعة */
+  .stat-card, .custom-card {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* تحسين دعم الشاشات الصغيرة جدًا */
 @media (max-width: 375px) {
   body {
@@ -514,12 +594,43 @@ a:hover, a:focus {
     padding: 0.5rem 0.7rem;
     font-size: 0.85rem;
   }
+  
+  /* تعديل أحجام العناوين الرئيسية */
+  h1 {
+    font-size: 1.4rem;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+  
+  /* تحسين عرض البطاقات */
+  .stat-card .display-6 {
+    font-size: 1.3rem !important;
+  }
+  
+  .stat-card .stat-icon {
+    font-size: 1.5rem !important;
+  }
+  
+  /* تحسين ظهور أزرار الرأس */
+  header .btn {
+    padding: 0.35rem 0.5rem;
+  }
 }
 
 /* تحسينات لدعم الشاشات عالية الدقة */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .btn, .card, .form-control {
     border-width: 0.5px;
+  }
+  
+  .stat-card, .custom-card {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
 }
 
@@ -528,4 +639,81 @@ a:hover, a:focus {
   .modal-dialog {
     max-width: 90vh;
   }
+  
+  /* تحسين القائمة الجانبية في الوضع الأفقي للجوال */
+  @media (max-height: 450px) {
+    .sidebar .sidebar-header {
+      padding: 10px 0;
+    }
+    
+    .sidebar .slogan {
+      font-size: 0.9rem;
+    }
+    
+    .sidebar .components li a {
+      padding: 6px 15px;
+    }
+    
+    .sidebar-footer {
+      margin-top: 10px;
+      padding: 10px 0;
+    }
+  }
 }
+
+/* تحسينات إضافية للقابلية */
+.btn, .card, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* تصفية أزرار الوصول لراحة العين */
+.form-control, .form-select {
+  filter: brightness(100%);
+  transition: filter 0.3s ease;
+}
+
+.form-control:hover, .form-select:hover {
+  filter: brightness(102%);
+}
+
+/* تحسين تصور أخطاء النماذج */
+.form-control.is-invalid {
+  background-position: left calc(0.375em + 0.1875rem) center;
+}
+
+/* تحسين أداء الصفحة */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* تحسين إضافي لعنصر التحميل */
+.loading-pulse::after {
+  will-change: transform;
+}
+
+/* تحسين أداء الظلال */
+.custom-card, .stat-card, .btn, .toast {
+  will-change: transform, box-shadow;
+}
+
+/* تحسين وضع المتابعة الليلي (داكن) */
+@media (prefers-color-scheme: dark) {
+  .high-contrast {
+    background-color: #121212;
+  }
+  
+  .high-contrast .card {
+    background-color: #1e1e1e;
+  }
+  
+  .high-contrast .form-control {
+    background-color: #333;
+    color: #fff;
+  }
+}
+

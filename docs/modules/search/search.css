@@ -1,9 +1,12 @@
 /* تنسيقات وحدة البحث - search.css */
 /* رابط النشر: https://hajj-healthcare-app.netlify.app/ */
-/* الإصدار: 1.2.0 */
+/* الإصدار: 1.3.0 - محدث مع تحسينات الأداء والتصميم */
 
-/* متغيرات الألوان */
+/*===================
+   1. المتغيرات
+===================*/
 :root {
+  /* ألوان أساسية */
   --primary-color: #2563eb;
   --primary-dark: #1d4ed8;
   --primary-light: #dbeafe;
@@ -12,16 +15,38 @@
   --danger-color: #ef4444;
   --warning-color: #f59e0b;
   --info-color: #3b82f6;
+  
+  /* ألوان الخلفية والنص */
   --background-color: #f8fafc;
   --card-color: #ffffff;
   --text-color: #1e293b;
-  --text-muted: #64748b;
+  --text-muted: #52525b; /* تحسين التباين */
   --border-color: #e2e8f0;
+  
+  /* الظلال والانتقالات */
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --transition: all 0.3s ease-in-out;
+  
+  /* نصف قطر الحواف */
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-pill: 50px;
+  
+  /* المسافات والتباعد */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
 }
 
-/* تنسيقات عامة */
+/*===================
+   2. تنسيقات عامة
+===================*/
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -45,7 +70,20 @@ body {
   background: linear-gradient(135deg, #f9fafb, #f3f4f6) !important;
 }
 
-/* تنسيقات عنوان البحث */
+/* تأثيرات الظل والارتفاع المشتركة */
+.shadow-hover {
+  transition: var(--transition);
+  will-change: transform, box-shadow;
+}
+
+.shadow-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/*===================
+   3. عنوان البحث
+===================*/
 .search-header {
   padding: 1.5rem 0;
 }
@@ -67,7 +105,7 @@ body {
   transition: var(--transition);
   font-weight: 500;
   padding: 6px 10px;
-  border-radius: 50px;
+  border-radius: var(--border-radius-pill);
 }
 
 .search-header .badge:hover {
@@ -75,7 +113,9 @@ body {
   transform: translateY(-2px);
 }
 
-/* حاوية البحث */
+/*===================
+   4. حاوية البحث
+===================*/
 .search-container {
   max-width: 650px;
   width: 100%;
@@ -83,21 +123,24 @@ body {
 }
 
 .card {
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  will-change: transform, box-shadow;
 }
 
 .card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
 }
 
 .card-header {
   padding: 1rem 1.5rem;
 }
 
-/* حقول البحث */
+/*===================
+   5. حقول البحث
+===================*/
 .search-field {
   margin-bottom: 1.5rem;
 }
@@ -110,7 +153,7 @@ body {
 
 .form-control {
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   border: 1px solid var(--border-color);
   font-size: 1rem;
   box-shadow: none;
@@ -120,6 +163,11 @@ body {
 .form-control:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.form-control:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 1px;
 }
 
 .input-group-lg > .form-control {
@@ -145,7 +193,9 @@ body {
   background-size: 20px;
 }
 
-/* فاصل (أو) */
+/*===================
+   6. فاصل (أو)
+===================*/
 .divider {
   display: flex;
   align-items: center;
@@ -169,7 +219,9 @@ body {
   top: 0.1rem;
 }
 
-/* أزرار البحث */
+/*===================
+   7. أزرار البحث
+===================*/
 .search-buttons {
   display: flex;
   justify-content: center;
@@ -183,7 +235,7 @@ body {
 
 .btn {
   padding: 0.625rem 1.25rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   font-weight: 600;
   font-size: 1rem;
   transition: var(--transition);
@@ -191,6 +243,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  will-change: transform;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .btn-lg {
@@ -203,12 +261,16 @@ body {
   border-color: var(--primary-color);
 }
 
+:is(.btn-primary, .btn-danger, .btn-warning):hover,
+:is(.btn-primary, .btn-danger, .btn-warning):focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
 .btn-primary:hover, 
 .btn-primary:focus {
   background-color: var(--primary-dark);
   border-color: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .btn-outline-secondary {
@@ -231,11 +293,11 @@ body {
 .btn-danger:focus {
   background-color: #dc2626;
   border-color: #dc2626;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
-/* مؤشر التحميل */
+/*===================
+   8. مؤشر التحميل
+===================*/
 #loadingSpinner {
   margin: 3rem auto;
   text-align: center;
@@ -260,7 +322,25 @@ body {
   color: var(--text-muted);
 }
 
-/* نتائج البحث */
+/* حالة تحميل للكل */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading-skeleton 1.5s infinite;
+}
+
+@keyframes loading-skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/*===================
+   9. نتائج البحث
+===================*/
 #searchResults {
   max-width: 900px;
   margin: 2rem auto;
@@ -283,13 +363,15 @@ body {
   background-color: var(--primary-light);
   color: var(--primary-dark);
   padding: 0.3rem 1rem;
-  border-radius: 50px;
+  border-radius: var(--border-radius-pill);
   font-weight: 600;
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
 
-/* فلترة النتائج */
+/*===================
+   10. فلترة النتائج
+===================*/
 .filter-container {
   position: relative;
   margin-bottom: 1.5rem;
@@ -309,10 +391,12 @@ body {
   pointer-events: none;
 }
 
-/* جدول نتائج البحث */
+/*===================
+   11. جدول نتائج البحث
+===================*/
 .table-container {
   background-color: var(--card-color);
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -334,12 +418,19 @@ body {
 .table tbody tr {
   transition: var(--transition);
   cursor: pointer;
+  will-change: transform, background-color;
 }
 
 .table tbody tr:hover {
   background-color: #eef2ff !important;
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.table tbody tr:focus-visible {
+  outline: 2px solid var(--primary-color);
+  position: relative;
+  z-index: 1;
 }
 
 .table th i,
@@ -367,7 +458,9 @@ body {
   color: var(--text-muted);
 }
 
-/* تمييز النص في نتائج البحث */
+/*===================
+   12. تمييز النص في نتائج البحث
+===================*/
 .highlight {
   background-color: var(--primary-light);
   border-radius: 3px;
@@ -375,7 +468,9 @@ body {
   font-weight: 600;
 }
 
-/* بطاقة بيانات الحاج */
+/*===================
+   13. بطاقة بيانات الحاج
+===================*/
 #pilgrimCard {
   max-width: 750px;
   margin: 2rem auto;
@@ -390,12 +485,21 @@ body {
   padding: 1.5rem;
 }
 
+/* تنظيم أقسام البيانات في شبكة */
+.pilgrim-data-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
 /* أقسام بيانات الحاج */
 .pilgrim-section {
   margin-bottom: 2rem;
   background-color: #f9fafb;
-  border-radius: 10px;
+  border-radius: var(--border-radius-lg);
   padding: 1.25rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
 
 .pilgrim-section:last-child {
@@ -418,7 +522,9 @@ body {
   opacity: 0.8;
 }
 
-/* جدول بيانات الحاج */
+/*===================
+   14. جدول بيانات الحاج
+===================*/
 .pilgrim-data-table {
   width: 100%;
   border-collapse: collapse;
@@ -448,7 +554,9 @@ body {
   font-weight: 500;
 }
 
-/* فوتر بطاقة الحاج */
+/*===================
+   15. فوتر بطاقة الحاج
+===================*/
 .card-footer {
   padding: 1.25rem;
   background-color: #f8fafc;
@@ -469,9 +577,11 @@ body {
 .card-footer .btn:nth-child(2) { order: 2; } /* إضافة بيانات الوفاة */
 .card-footer .btn:nth-child(3) { order: 3; } /* طباعة البيانات */
 
-/* تنبيهات */
+/*===================
+   16. تنبيهات
+===================*/
 .alert {
-  border-radius: 10px;
+  border-radius: var(--border-radius-lg);
   padding: 1.25rem;
   margin-bottom: 1.5rem;
   border: none;
@@ -508,25 +618,48 @@ body {
   color: #065f46;
 }
 
-/* تأثيرات الحيوية والحركة */
+/*===================
+   17. تأثيرات الحيوية والحركة
+===================*/
 .animate__animated {
   --animate-duration: 0.5s;
 }
 
-/* شارات وعلامات */
+/* مكون نيومورفيزم */
+.neumorphic {
+  background: var(--background-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.05),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.neumorphic:hover {
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.05),
+    -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 2px rgba(0, 0, 0, 0.05),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/*===================
+   18. شارات وعلامات
+===================*/
 .badge {
   padding: 0.35em 0.65em;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
 }
 
 .badge-pill {
-  border-radius: 50px;
+  border-radius: var(--border-radius-pill);
   padding-right: 0.8em;
   padding-left: 0.8em;
 }
 
-/* فوتر التطبيق */
+/*===================
+   19. فوتر التطبيق
+===================*/
 .app-footer {
   text-align: center;
   padding: 2rem 0;
@@ -544,7 +677,9 @@ body {
   text-decoration: underline;
 }
 
-/* عناصر مرئية فقط عند الطباعة */
+/*===================
+   20. عناصر مرئية فقط عند الطباعة
+===================*/
 .print-only {
   display: none;
 }
@@ -559,7 +694,7 @@ body {
   margin-bottom: 15px;
   padding: 8px;
   background-color: #f8f9fa;
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
   font-size: 16px;
 }
 
@@ -570,7 +705,9 @@ body {
   color: #666;
 }
 
-/* تنسيقات إضافية للأجهزة المحمولة */
+/*===================
+   21. تنسيقات إضافية للأجهزة المحمولة
+===================*/
 @media (max-width: 768px) {
   .search-header h2 {
     font-size: 1.5rem;
@@ -622,7 +759,71 @@ body {
   }
 }
 
-/* تنسيقات الطباعة */
+/* تحسينات للأجهزة المحمولة الصغيرة جدًا */
+@media (max-width: 480px) {
+  .search-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .search-header p {
+    font-size: 0.9rem;
+  }
+  
+  .table-container {
+    border-radius: var(--border-radius-md);
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .pilgrim-section {
+    padding: 0.8rem;
+  }
+  
+  .pilgrim-section h4 {
+    font-size: 1rem;
+  }
+  
+  .pilgrim-data-table th, 
+  .pilgrim-data-table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* تحسينات للأجهزة اللوحية */
+@media (min-width: 768px) and (max-width: 991px) {
+  .search-container {
+    max-width: 90%;
+  }
+  
+  .pilgrim-section {
+    padding: 1rem;
+  }
+  
+  .card-footer {
+    flex-wrap: wrap;
+  }
+  
+  .card-footer .btn {
+    flex: 0 0 calc(50% - 10px);
+    margin-bottom: 10px;
+  }
+}
+
+/* للأجهزة الكبيرة */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .search-container {
+    max-width: 700px;
+  }
+}
+
+/*===================
+   22. تنسيقات الطباعة
+===================*/
 @media print {
   body * {
     visibility: hidden;
@@ -713,49 +914,199 @@ body {
     size: A4;
     margin: 1.5cm;
   }
-/* تحسينات للأجهزة المحمولة الصغيرة جدًا */
-@media (max-width: 480px) {
-  .search-header h2 {
-    font-size: 1.3rem;
+  
+  /* إضافة ترويسة وتذييل للطباعة */
+  @page {
+    @top-center {
+      content: "نظام الرعاية الصحية للحجاج - 1446هـ";
+      font-family: 'Cairo', sans-serif;
+    }
+    @bottom-center {
+      content: "صفحة " counter(page) " من " counter(pages);
+      font-family: 'Cairo', sans-serif;
+    }
   }
   
-  .search-header p {
-    font-size: 0.9rem;
+   /* إخفاء الأيقونات واستبدالها بنص في الطباعة */
+  .fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands {
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: normal !important;
   }
   
-  .table-container {
-    border-radius: 8px;
+  /* تحسين الطباعة للجداول */
+  .table {
+    border-collapse: collapse;
+    width: 100%;
   }
   
-  .table thead th,
-  .table tbody td {
-    padding: 0.7rem 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .pilgrim-section {
-    padding: 0.8rem;
-  }
-  
-  .pilgrim-section h4 {
-    font-size: 1rem;
-  }
-  
-  .pilgrim-data-table th, 
-  .pilgrim-data-table td {
-    padding: 0.6rem 0.4rem;
-    font-size: 0.9rem;
+  .table th,
+  .table td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
   }
 }
 
-/* تحسينات للأجهزة اللوحية */
-@media (min-width: 768px) and (max-width: 992px) {
-  .card-footer {
-    flex-wrap: wrap;
+/*===================
+   23. تحسينات أداء
+===================*/
+/* استخدام content-visibility لتحسين الأداء */
+.pilgrim-section, 
+.table-container,
+.search-container,
+.card-footer {
+  content-visibility: auto;
+}
+
+/* تحسين أداء التمرير (scroll) */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
   
-  .card-footer .btn {
-    flex: 0 0 calc(50% - 10px);
-    margin-bottom: 10px;
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
+
+/*===================
+   24. توافق المتصفحات
+===================*/
+/* دعم -webkit- للمتصفحات القديمة */
+.form-control:focus {
+  -webkit-box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* تحسينات لمتصفح Safari */
+@supports (-webkit-appearance: none) {
+  .form-control,
+  .btn,
+  .card {
+    -webkit-appearance: none;
+  }
+}
+
+/* دعم متصفحات قديمة للانتقالات */
+.table tbody tr:hover {
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.shadow-hover {
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  transition: var(--transition);
+}
+
+/*===================
+   25. إمكانية الوصول
+===================*/
+/* تحسين إمكانية الوصول باستخدام لوحة المفاتيح */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* تحسين تجربة الشاشات القارئة */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* تعزيز التباين للنصوص الصغيرة */
+.small {
+  font-size: 85%;
+  font-weight: 500;
+}
+
+/*===================
+   26. دعم التخصيص المستقبلي
+===================*/
+/* توفير قيم افتراضية لدعم المتصفحات القديمة */
+:root {
+  --fallback-primary-color: #2563eb;
+  --fallback-background-color: #f8fafc;
+  --fallback-text-color: #1e293b;
+  --fallback-border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--background-color, var(--fallback-background-color));
+  color: var(--text-color, var(--fallback-text-color));
+}
+
+.text-primary {
+  color: var(--primary-color, var(--fallback-primary-color)) !important;
+}
+
+/*===================
+   27. تحسينات CSS المتقدمة
+===================*/
+/* استخدام aspect-ratio للحفاظ على نسب العناصر */
+.profile-image-container {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 150px;
+}
+
+/* استخدام CSS Grid للتنسيق */
+.advanced-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* استخدام تأثيرات حركة متقدمة */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse-effect:hover {
+  animation: pulse 1s infinite;
+}
+
+/*===================
+   28. تحسينات الأداء النهائية
+===================*/
+/* تحسين أداء تقديم CSS */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* تقليل عبء اعادة التصيير الكامل */
+input, textarea, select, button {
+  transform: translateZ(0);
+}
+
+/* تقليل أثر الزيارة السابقة */
+:visited {
+  transition: none;
+}
+
+/* النهاية */
+

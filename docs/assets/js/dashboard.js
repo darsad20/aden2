@@ -3,7 +3,6 @@
  * @version 2.0.0
  * @description نظام متكامل لمتابعة الرعاية الصحية لحجاج الجمهورية اليمنية
  */
-
 document.addEventListener("DOMContentLoaded", () => {
   initializeDashboard();
 });
@@ -93,12 +92,12 @@ function adjustUIForSmallScreens() {
  */
 function updateStatisticsData() {
   const baseUrl = 'https://script.google.com/macros/s/AKfycbzy-SYwUOW-0jAOvZHT6Q1MKxwm7PIXgRe4dia4NVoD6dBzxP2PyD_i9yGF0IKlnwrg/exec';
-
+  
   // إظهار مؤشر التحميل على البطاقات
   document.querySelectorAll('.stat-card .display-6').forEach(el => {
     el.classList.add('loading-pulse');
   });
-
+  
   // تحديث إجمالي الحجاج
   fetch(`${baseUrl}?action=getTotalPilgrims`)
     .then(response => response.json())
@@ -112,15 +111,13 @@ function updateStatisticsData() {
       animateCounter("totalPilgrims", 0);
       document.getElementById("totalPilgrims")?.classList.remove('loading-pulse');
     });
-
+    
   // تحديث عدد الزوار اليومي (تصفية بناءً على تاريخ اليوم)
   fetch(`${baseUrl}?action=getDailyVisitors`)
     .then(response => response.json())
     .then(data => {
       const today = new Date().toISOString().split("T")[0];
-      const dailyVisitors = Array.isArray(data)
-        ? data.filter(row => row["التاريخ"] && row["التاريخ"].includes(today))
-        : [];
+      const dailyVisitors = Array.isArray(data) ? data.filter(row => row["التاريخ"] && row["التاريخ"].includes(today)) : [];
       animateCounter("treatedCases", dailyVisitors.length);
       document.getElementById("treatedCases")?.classList.remove('loading-pulse');
     })
@@ -129,7 +126,7 @@ function updateStatisticsData() {
       animateCounter("treatedCases", 0);
       document.getElementById("treatedCases")?.classList.remove('loading-pulse');
     });
-
+    
   // تحديث الحالات المحولة
   fetch(`${baseUrl}?action=getTransferredCases`)
     .then(response => response.json())
@@ -143,7 +140,7 @@ function updateStatisticsData() {
       animateCounter("transferredCases", 0);
       document.getElementById("transferredCases")?.classList.remove('loading-pulse');
     });
-
+    
   // تحديث عدد الوفيات
   fetch(`${baseUrl}?action=getDeathReport`)
     .then(response => response.json())
@@ -157,7 +154,7 @@ function updateStatisticsData() {
       animateCounter("deathCount", 0);
       document.getElementById("deathCount")?.classList.remove('loading-pulse');
     });
-
+    
   // تحديث عدد التنبيهات
   const notificationBadge = document.getElementById("notificationCount");
   if (notificationBadge) {
@@ -212,41 +209,41 @@ function easeOutQuad(t) {
  */
 function setupNotificationSystem() {
   const notifications = [
-    { 
-      id: 1, 
-      message: "تنبيه: حالة طارئة لحاج يمني يحتاج متابعة عاجلة في مستشفى منى!", 
-      type: "emergency", 
-      time: "منذ 5 دقائق" 
+    {
+      id: 1,
+      message: "تنبيه: حالة طارئة لحاج يمني يحتاج متابعة عاجلة في مستشفى منى!",
+      type: "emergency",
+      time: "منذ 5 دقائق"
     },
-    { 
-      id: 2, 
-      message: "تذكير: يجب تحديث بيانات حالات الإجهاد الحراري للحجاج اليمنيين في موقع عرفات.", 
-      type: "reminder", 
-      time: "منذ 20 دقيقة" 
+    {
+      id: 2,
+      message: "تذكير: يجب تحديث بيانات حالات الإجهاد الحراري للحجاج اليمنيين في موقع عرفات.",
+      type: "reminder",
+      time: "منذ 20 دقيقة"
     },
-    { 
-      id: 3, 
-      message: "إشعار: تم إضافة 15 حالة جديدة من الحجاج اليمنيين في العيادات الميدانية.", 
-      type: "info", 
-      time: "منذ ساعة" 
+    {
+      id: 3,
+      message: "إشعار: تم إضافة 15 حالة جديدة من الحجاج اليمنيين في العيادات الميدانية.",
+      type: "info",
+      time: "منذ ساعة"
     },
-    { 
-      id: 4, 
-      message: "تقرير: تم نقل 3 حجاج يمنيين من منطقة المشاعر إلى المستشفى التخصصي.", 
-      type: "transfer", 
-      time: "منذ ساعتين" 
+       {
+      id: 4,
+      message: "تقرير: تم نقل 3 حجاج يمنيين من منطقة المشاعر إلى المستشفى التخصصي.",
+      type: "transfer",
+      time: "منذ ساعتين"
     },
-    { 
-      id: 5, 
-      message: "تحديث: وصول كشف جديد بمعلومات الحجاج اليمنيين المتأخرين.", 
-      type: "update", 
-      time: "منذ 3 ساعات" 
+    {
+      id: 5,
+      message: "تحديث: وصول كشف جديد بمعلومات الحجاج اليمنيين المتأخرين.",
+      type: "update",
+      time: "منذ 3 ساعات"
     }
   ];
-
+  
   const toastContainer = document.getElementById("toastContainer");
   if (!toastContainer) return;
-
+  
   const notificationBtn = document.getElementById("notificationBtn");
   if (notificationBtn) {
     notificationBtn.addEventListener("click", () => {
@@ -254,7 +251,7 @@ function setupNotificationSystem() {
       notifications.forEach((notif) => showNotification(notif, toastContainer));
     });
   }
-
+  
   // عرض أول 3 تنبيهات فقط في الشاشات الكبيرة، وأول تنبيهين فقط في الشاشات الصغيرة
   const displayCount = window.innerWidth <= 768 ? 2 : 3;
   notifications.slice(0, displayCount).forEach((notif) => showNotification(notif, toastContainer));
@@ -468,9 +465,10 @@ function setupMobileNavigation() {
     if (window.innerWidth <= 768 && 
         sidebar.classList.contains("show") && 
         !sidebar.contains(e.target) && 
-        e.target !== sidebarToggle &&
-        !sidebarToggle.contains(e.target) &&
+        e.target !== sidebarToggle && 
+        !sidebarToggle.contains(e.target) && 
         e.target !== overlay) {
+          
       sidebar.classList.remove("show");
       overlay.classList.remove('active');
       document.body.style.overflow = '';
@@ -519,7 +517,7 @@ function enhanceAccessibility() {
       }
     });
   });
-
+  
   document.querySelectorAll('.stat-card').forEach((card) => {
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -528,7 +526,7 @@ function enhanceAccessibility() {
         setTimeout(() => card.classList.remove("card-focus"), 300);
       }
     });
-
+    
     card.addEventListener("mouseenter", () => {
       card.setAttribute("aria-expanded", "true");
     });
@@ -543,7 +541,7 @@ function enhanceAccessibility() {
     const value = card.querySelector('.display-6')?.textContent || '';
     card.setAttribute('aria-label', `${title}: ${value}`);
   });
-
+  
   document.querySelectorAll('button').forEach(button => {
     if (!button.getAttribute('aria-label')) {
       const text = button.textContent.trim();
@@ -667,3 +665,4 @@ function updateFullscreenButtonIcon() {
     fullscreenBtn.setAttribute('aria-label', 'تفعيل وضع الشاشة الكاملة');
   }
 }
+

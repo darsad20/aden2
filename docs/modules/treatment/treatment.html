@@ -21,11 +21,20 @@
 </head>
 <body>
   <div class="container my-4">
-    <h2 class="text-center page-title">بيانات العلاج</h2>
+    <h2 class="text-center page-title d-print-none">بيانات العلاج</h2>
     
     <div class="card custom-card">
-      <div class="card-header">
-        <i class="fas fa-stethoscope me-2"></i> إدخال بيانات علاج جديد
+      <div class="card-header d-print-none">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+          <div>
+            <i class="fas fa-stethoscope me-2"></i> إدخال بيانات علاج جديد
+          </div>
+          <div class="action-buttons mt-2 mt-sm-0">
+            <button type="button" class="btn btn-sm btn-outline-primary me-1" id="printButton">
+              <i class="fas fa-print"></i> طباعة التقرير
+            </button>
+          </div>
+        </div>
       </div>
       <div class="card-body">
         <form id="treatmentForm">
@@ -45,16 +54,31 @@
             </div>
             
             <div class="col-md-6 mb-3">
-              <label for="hotel" class="form-label">الفندق</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-hotel"></i></span>
-                <input type="text" class="form-control" id="hotel" 
-                       placeholder="أدخل اسم الفندق" required>
-              </div>
+              <label for="serviceOffice" class="form-label">مكتب الخدمة</label>
+              <select class="form-select" id="serviceOffice" required>
+                <option value="" selected disabled>اختر مكتب الخدمة</option>
+                <option value="1">1 - مكتب الخدمة الأول</option>
+                <option value="2">2 - مكتب الخدمة الثاني</option>
+                <option value="3">3 - مكتب الخدمة الثالث</option>
+                <option value="4">4 - مكتب الخدمة الرابع</option>
+                <option value="5">5 - مكتب الخدمة الخامس</option>
+              </select>
             </div>
           </div>
           
           <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="hotel" class="form-label">الفندق</label>
+              <select class="form-select" id="hotel" required>
+                <option value="" selected disabled>اختر الفندق</option>
+                <option value="تجربة 1">تجربة 1</option>
+                <option value="تجربة 2">تجربة 2</option>
+                <option value="تجربة 3">تجربة 3</option>
+                <option value="تجربة 4">تجربة 4</option>
+                <option value="تجربة 5">تجربة 5</option>
+              </select>
+            </div>
+            
             <div class="col-md-6 mb-3">
               <label for="treatmentDate" class="form-label">التاريخ</label>
               <div class="input-group">
@@ -62,7 +86,9 @@
                 <input type="date" class="form-control" id="treatmentDate" required>
               </div>
             </div>
-            
+          </div>
+          
+          <div class="row">
             <div class="col-md-6 mb-3">
               <label for="treatmentTime" class="form-label">الوقت</label>
               <div class="input-group">
@@ -120,25 +146,106 @@
             <div class="col-md-4 mb-3">
               <label for="medicalCondition" class="form-label">الحالة المرضية</label>
               <select class="form-select" id="medicalCondition" required>
-                <option value="" selected disabled>اختر نوع المرض</option>
-                <option value="عدوى الفيروسات">عدوى الفيروسات</option>
-                <option value="عدوى البكتيريا">عدوى البكتيريا</option>
-                <option value="عدوى الفطريات">عدوى الفطريات</option>
-                <option value="عدوى الطفيليات">عدوى الطفيليات</option>
-                <option value="أمراض السكري والغدد الصماء">أمراض السكري والغدد الصماء</option>
-                <option value="أمراض القلب والأوعية الدموية">أمراض القلب والأوعية الدموية</option>
-                <option value="أمراض الجهاز التنفسي">أمراض الجهاز التنفسي</option>
-                <option value="أمراض الأورام السرطانية">أمراض الأورام السرطانية</option>
-                <option value="الأمراض النفسية أو الذهنية">الأمراض النفسية أو الذهنية</option>
-                <option value="أمراض الفشل الكلوي">أمراض الفشل الكلوي</option>
-                <option value="مرضى زراعة الأعضاء">مرضى زراعة الأعضاء</option>
-                <option value="أمراض الدم">أمراض الدم</option>
-                <option value="أمراض المناعة">أمراض المناعة</option>
-                <option value="الأمراض الجلدية">الأمراض الجلدية</option>
-                <option value="حوادث السير">حوادث السير</option>
-                <option value="الحروق وضربات الشمس">الحروق وضربات الشمس</option>
-                <option value="أخرى">أخرى</option>
+                <option value="" selected disabled>اختر الحالة المرضية</option>
+                <option value="U.R.T.I">U.R.T.I</option>
+                <option value="L.T.I">L.T.I</option>
+                <option value="Diarrhea">Diarrhea</option>
+                <option value="Gastritis">Gastritis</option>
+                <option value="Dehydration">Dehydration</option>
+                <option value="Cough">Cough</option>
+                <option value="Headache">Headache</option>
+                <option value="Magrin">Magrin</option>
+                <option value="Allergic reaction">Allergic reaction</option>
+                <option value="Food poisoning">Food poisoning</option>
+                <option value="Common cold">Common cold</option>
+                <option value="Covid 19">Covid 19</option>
+                <option value="D.M (Diabetes Mellitus)">D.M (Diabetes Mellitus)</option>
+                <option value="Cardiac disease">Cardiac disease</option>
+                <option value="H.T.M (Hypertension)">H.T.M (Hypertension)</option>
+                <option value="Joint Pain">Joint Pain</option>
+                <option value="Muscle spasm">Muscle spasm</option>
+                <option value="Hypertension">Hypertension</option>
+                <option value="Hypoglycemia">Hypoglycemia</option>
+                <option value="Asthma">Asthma</option>
+                <option value="R.Colic">R.Colic</option>
+                <option value="Renal Filer">Renal Filer</option>
+                <option value="Injury">Injury</option>
+                <option value="Otitis M">Otitis M</option>
+                <option value="Follow up">Follow up</option>
+                <option value="Skin disorder">Skin disorder</option>
+                <option value="Epilepsy">Epilepsy</option>
+                <option value="Dialysis">Dialysis</option>
+                <option value="Heat exaptation">Heat exaptation</option>
+                <option value="Infection">Infection</option>
+                <option value="Others">Others</option>
               </select>
+            </div>
+          </div>
+          
+          <!-- القسم الجديد: المؤشرات الحيوية -->
+          <h5 class="section-title">
+            <i class="fas fa-heartbeat me-2"></i> المؤشرات الحيوية
+          </h5>
+          
+          <div class="row">
+            <div class="col-md-3 col-6 mb-3">
+              <label for="temperature" class="form-label">درجة الحرارة</label>
+              <div class="input-group">
+                <input type="number" step="0.1" class="form-control" id="temperature" placeholder="e.g. 37.0">
+                <span class="input-group-text">°C</span>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6 mb-3">
+              <label for="bloodPressure" class="form-label">ضغط الدم</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="bloodPressure" placeholder="e.g. 120/80">
+                <span class="input-group-text">mmHg</span>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6 mb-3">
+              <label for="pulseRate" class="form-label">معدل النبض</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="pulseRate" placeholder="e.g. 72">
+                <span class="input-group-text">bpm</span>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6 mb-3">
+              <label for="respiratoryRate" class="form-label">معدل التنفس</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="respiratoryRate" placeholder="e.g. 16">
+                <span class="input-group-text">bpm</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-4 col-6 mb-3">
+              <label for="oxygenSaturation" class="form-label">تشبع الأكسجين</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="oxygenSaturation" placeholder="e.g. 98">
+                <span class="input-group-text">%</span>
+              </div>
+            </div>
+            
+            <div class="col-md-4 col-6 mb-3">
+              <label for="bloodGlucose" class="form-label">مستوى السكر</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="bloodGlucose" placeholder="e.g. 100">
+                <span class="input-group-text">mg/dL</span>
+              </div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+              <label for="painLevel" class="form-label">مستوى الألم (0-10)</label>
+              <input type="range" class="form-range" min="0" max="10" id="painLevel">
+              <div class="d-flex justify-content-between">
+                <span>0</span>
+                <span>5</span>
+                <span>10</span>
+              </div>
             </div>
           </div>
           
@@ -211,7 +318,8 @@
                   <input class="form-check-input" type="radio" name="externalReferral" id="referralNo" value="لا" checked>
                   <label class="form-check-label" for="referralNo">
                     لا
-                  </label>                </div>
+                  </label>                
+                </div>
               </div>
             </div>
           </div>
@@ -258,12 +366,107 @@
                 </div>
               </div>
             </div>
+            
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label for="referralReason" class="form-label">سبب التحويل</label>
+                <textarea class="form-control" id="referralReason" rows="2" 
+                          placeholder="أدخل سبب التحويل الخارجي"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <!-- القسم الخامس: المرفقات -->
+          <h5 class="section-title d-print-none">
+            <i class="fas fa-paperclip me-2"></i> المرفقات
+          </h5>
+          
+          <div class="row d-print-none">
+            <div class="col-12 mb-3">
+              <div class="attachment-dropzone" id="attachmentDropzone">
+                <div class="text-center p-4">
+                  <i class="fas fa-file-upload fa-2x mb-3"></i>
+                  <p>اسحب وأفلت الملفات هنا أو انقر للتصفح</p>
+                  <input type="file" multiple id="fileInput" class="d-none">
+                  <button type="button" class="btn btn-outline-secondary mt-2" id="browseButton">
+                    تصفح الملفات
+                  </button>
+                </div>
+              </div>
+              <div id="attachmentsPreview" class="mt-3 row g-2"></div>
+            </div>
+          </div>
+          
+          <!-- القسم السادس: جدولة المتابعة -->
+          <h5 class="section-title">
+            <i class="fas fa-calendar-check me-2"></i> جدولة المتابعة
+          </h5>
+          
+          <div class="row">
+            <div class="col-12 mb-3">
+              <label class="form-label">هل يحتاج المريض إلى متابعة؟</label>
+              <div class="d-flex gap-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="needsFollowup" id="followupYes" value="نعم">
+                  <label class="form-check-label" for="followupYes">
+                    نعم
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="needsFollowup" id="followupNo" value="لا" checked>
+                  <label class="form-check-label" for="followupNo">
+                    لا
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بيانات المتابعة (تظهر عند اختيار نعم) -->
+          <div class="followup-section" id="followupDetails" style="display: none;">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="followupDate" class="form-label">تاريخ المتابعة</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                  <input type="date" class="form-control" id="followupDate">
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="followupTime" class="form-label">وقت المتابعة</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                  <input type="time" class="form-control" id="followupTime">
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="followupType" class="form-label">نوع المتابعة</label>
+                <select class="form-select" id="followupType">
+                  <option value="" selected disabled>اختر نوع المتابعة</option>
+                  <option value="فحص العلامات الحيوية">فحص العلامات الحيوية</option>
+                  <option value="متابعة العلاج">متابعة العلاج</option>
+                  <option value="تغيير الضماد">تغيير الضماد</option>
+                  <option value="مراجعة نتائج الفحوصات">مراجعة نتائج الفحوصات</option>
+                  <option value="متابعة عامة">متابعة عامة</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="followupNotes" class="form-label">ملاحظات المتابعة</label>
+                <textarea class="form-control" id="followupNotes" rows="2" 
+                          placeholder="أدخل أي ملاحظات خاصة بالمتابعة"></textarea>
+              </div>
+            </div>
           </div>
           
           <hr class="custom-divider">
           
           <!-- أزرار التحكم -->
-          <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex justify-content-between mt-4 d-print-none">
             <button type="button" class="btn btn-outline-secondary" id="resetForm">
               <i class="fas fa-undo me-1"></i> إعادة تعيين
             </button>
@@ -272,6 +475,92 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- قسم الطباعة - يظهر فقط عند الطباعة -->
+  <div class="d-none d-print-block mt-4" id="printSection">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h3>تقرير العلاج الطبي</h3>
+        <p class="small text-muted" id="printDate"></p>
+      </div>
+      
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-2"><strong>اسم الطبيب:</strong> <span id="print-doctorName"></span></div>
+          <div class="mb-2"><strong>الفندق:</strong> <span id="print-hotel"></span></div>
+          <div class="mb-2"><strong>مكتب الخدمة:</strong> <span id="print-serviceOffice"></span></div>
+        </div>
+        <div class="col-6">
+          <div class="mb-2"><strong>التاريخ:</strong> <span id="print-date"></span></div>
+          <div class="mb-2"><strong>الوقت:</strong> <span id="print-time"></span></div>
+          <div class="mb-2"><strong>الحالة المرضية:</strong> <span id="print-condition"></span></div>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <div class="mb-3">
+        <h5>المؤشرات الحيوية</h5>
+        <div class="row">
+          <div class="col-6 col-md-3 mb-2"><strong>درجة الحرارة:</strong> <span id="print-temperature"></span></div>
+          <div class="col-6 col-md-3 mb-2"><strong>ضغط الدم:</strong> <span id="print-bloodPressure"></span></div>
+          <div class="col-6 col-md-3 mb-2"><strong>معدل النبض:</strong> <span id="print-pulseRate"></span></div>
+          <div class="col-6 col-md-3 mb-2"><strong>معدل التنفس:</strong> <span id="print-respiratoryRate"></span></div>
+      </div>
+      
+      <div class="mb-3">
+        <h5>التشخيص</h5>
+        <p id="print-diagnosis"></p>
+      </div>
+      
+      <div class="mb-3">
+        <h5>الوصفة الطبية</h5>
+        <ul id="print-prescription" class="list-group"></ul>
+      </div>
+      
+      <div id="print-referral-section" class="mb-3" style="display: none;">
+        <h5>معلومات التحويل الخارجي</h5>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-2"><strong>المستشفى:</strong> <span id="print-hospitalName"></span></div>
+            <div class="mb-2"><strong>حالة المريض:</strong> <span id="print-patientStatus"></span></div>
+          </div>
+          <div class="col-6">
+            <div class="mb-2"><strong>تاريخ التحويل:</strong> <span id="print-referralDate"></span></div>
+            <div class="mb-2"><strong>وقت التحويل:</strong> <span id="print-referralTime"></span></div>
+          </div>
+        </div>
+        <div class="mb-2"><strong>سبب التحويل:</strong> <span id="print-referralReason"></span></div>
+      </div>
+      
+      <div id="print-followup-section" class="mb-3" style="display: none;">
+        <h5>معلومات المتابعة</h5>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-2"><strong>تاريخ المتابعة:</strong> <span id="print-followupDate"></span></div>
+            <div class="mb-2"><strong>وقت المتابعة:</strong> <span id="print-followupTime"></span></div>
+          </div>
+          <div class="col-6">
+            <div class="mb-2"><strong>نوع المتابعة:</strong> <span id="print-followupType"></span></div>
+          </div>
+        </div>
+        <div class="mb-2"><strong>ملاحظات المتابعة:</strong> <span id="print-followupNotes"></span></div>
+      </div>
+      
+      <hr>
+      
+      <div class="row mt-5">
+        <div class="col-6 text-center">
+          <div>توقيع الطبيب</div>
+          <div class="signature-line mt-4"></div>
+        </div>
+        <div class="col-6 text-center">
+          <div>ختم العيادة</div>
+          <div class="stamp-line mt-4"></div>
+        </div>
       </div>
     </div>
   </div>
